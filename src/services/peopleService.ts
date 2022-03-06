@@ -1,3 +1,4 @@
+import { Person } from "../Repo/db";
 import peopleRepo from "../Repo/people";
 
 const peopleServices = {
@@ -10,7 +11,7 @@ const peopleServices = {
     }
   },
 
-  addPerson: async () => {
+  addPerson: async (person: Person) => {
     try {
       const addper = "added one";
       return addper;
