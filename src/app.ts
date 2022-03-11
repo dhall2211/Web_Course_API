@@ -19,7 +19,7 @@ app.use("/addprofile", addProfile);
 
 app.get("/", async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).send({
-    data: "Hello World!",
+    data: "Hello World it works!",
   });
 });
 
@@ -30,3 +30,5 @@ try {
 } catch (error) {
   console.error(`Error occured: ${error}`);
 }
+
+// hello Dan
