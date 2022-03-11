@@ -1,4 +1,5 @@
 import Dexie, {Table} from 'dexie'
+import {persons} from './person';
 
 export interface Person {
     firstName: string;
@@ -14,16 +15,18 @@ export interface Person {
     videoLink?: string;
   }
 
-  class PersonDB extends Dexie {
-      public persons!: Table<Person>;
+    class DB extends Dexie {
+       persons!: Dexie.Table<Person, number>;
 
-      public constructor() {
-          super("PersonDB");
-          this.version(1).stores({
-              persons: "firstName, lastName, email, company, profession, cars, isAvailableByPhone, textGreeting, followers"
-          })
+       constructor() {
+          super("MyDB");
+           this.version(1).stores({
+               persons: "firstName, lastName, email, company, profession, cars, isAvailableByPhone, textGreeting, followers"
+           })
+           this.persons.bulkAdd(persons)
+        
       }
   }
+  export default DB;
 
 
-  export const db = new PersonDB()
