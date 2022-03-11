@@ -41,3 +41,5 @@ try {
 
 
 //IT WORKS, MichaelZ
+
+// actually it works too :-) SimonR
