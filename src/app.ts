@@ -30,17 +30,3 @@ try {
 } catch (error) {
   console.error(`Error occured: ${error}`);
 }
-
-// hello Dan
-//Michael B
-//Doro: https://github.com/dorobiro
-//Raphy: follow me on Github: https://github.com/RaphaellyLargo
-//Han Li updated
-// its Diyar
-//pabo
-
-//IT WORKS, MichaelZ
-
-// actually it works too :-) SimonR
-
-// unbedingt anschauen, wichtig! https://www.youtube.com/watch?v=iik25wqIuFo&ab
