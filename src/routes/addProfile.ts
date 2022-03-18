@@ -17,17 +17,14 @@ router.post("/", async (req, res) => {
   //     isAvailableByPhone: true,
   //     textGreeting: "Surf up dude",
   //     followers: 3
+  //     telephone: "5872147899",
   // }
-  
   try {
-    const test = true
     const profileAdded = await peopleService.addPerson(profile);
     profileAdded ? res.status(200).send('person added!') : res.status(406).send('unable to add person');
   } catch (error) {
     res.status(500).send();
   }
 });
-
-//router.put('/', () =>)
 
 module.exports = router;

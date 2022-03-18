@@ -1,1 +1,11 @@
-{"firstName":"Bob","lastName":"Muller","email":"@surfshop25635","company":"Bobs surf shop","profession":"beach bum","cars":[],"isAvailableByPhone":true,"textGreeting":"Surf up dude","followers":3}
+{
+    "firstName": "Bob",
+    "lastName": "Muller",
+    "email": "@surfshop25635",
+    "company": "Bobs surf shop",
+    "profession": "beach bum",
+    "cars": [],
+    "isAvailableByPhone": true,
+    "textGreeting": "Surf up dude",
+    "followers": 3
+}
