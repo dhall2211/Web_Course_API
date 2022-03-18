@@ -1,11 +1,11 @@
-import { Person } from "../Repo/db";
+import { Person } from "../Repo/people";
 import peopleRepo from "../Repo/people";
 
 const peopleServices = {
   getAllPeople: async () => {
     try {
-      const AllPeople = await peopleRepo.getPeople();
-      return AllPeople;
+      const allPeople = await peopleRepo.getPeople();
+      return allPeople;
     } catch (err) {
       throw Error;
     }
@@ -13,7 +13,7 @@ const peopleServices = {
 
   addPerson: async (person: Person) => {
     try {
-      const addper = "added one";
+      const addper = await peopleRepo.addPerson(person);
       return addper;
     } catch (err) {
       throw Error;

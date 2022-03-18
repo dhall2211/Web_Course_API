@@ -1,86 +1,66 @@
-import DB from './db'
-const db = new DB();
+export interface Person {
+  firstName: string;
+  lastName: string;
+  email: string;
+  company: string;
+  profession: string;
+  cars: string[];
+  isAvailableByPhone: boolean;
+  textGreeting: string;
+  followers: number;
+}
+import { readFile, writeFile } from "fs";
 
- const peopleRepo = {
-  getPeople: async() => {
-    return [
-      {
-        firstName: "Elon",
-        lastName: "Musk",
-        email: "@elonmusk",
-        company: "Space X",
-        profession: "CEO",
-        cars: ["tesla", "tesla"],
-        isAvailableByPhone: true,
-        textGreeting: "hello Space X is the future!",
-        followers: 100000,
-      },
-      {
-        firstName: "john",
-        lastName: "Lennon",
-        email: "@johnlennon",
-        profession: "singer",
-        company: "none",
-        cars: ["bwm", "porsche"],
-        isAvailableByPhone: true,
-        textGreeting: "let it be",
-        followers: 20000000
-      },
-      {
-        firstName: "Barrak",
-        lastName: "Obama",
-        email: "@barrakobama",
-        company: "none",
-        profession: "Us President",
-        cars: ["hummer", "corvette"],
-        isAvailableByPhone: true,
-        textGreeting: "hello everyone",
-        followers: 20004545
-      },
-      {
-        firstName: "Michael",
-        lastName: "Jordan",
-        email: "@mj",
-        company: "retired",
-        profession: "Professional Basketball Player",
-        cars: ["hummer", "corvette"],
-        isAvailableByPhone: true,
-        textGreeting: "be like mike",
-        followers: 40000000,
-      },
-      {
-        firstName: "tom",
-        lastName: "brady",
-        email: "@tombrady",
-        company: "Space X",
-        profession: "retired",
-        cars: ["hummer", "corvette"],
-        isAvailableByPhone: true,
-        textGreeting: "my favorite championship is the next one",
-        followers: 70000000,
-      },
-      {
-        firstName: "Tom",
-        lastName: "Cruz",
-        email: "@tomcruz",
-        company: "none",
-        profession: "actor",
-        cars: ["hummer", "corvette"],
-        isAvailableByPhone: false,
-        textGreeting: "i feel the need... the need for speed",
-        followers: 70000000,
-      },
-    ];
-    // try {
-    //   const persons = await db.table("PersonsDB");
-    //   console.log(persons)
-    //   return persons.toArray();
-    // } catch (error) {
-    //   console.log(error, 'table not found')
-    // }
-    
+const peopleRepo = {
+  getPeople: async function () {
+    return new Promise<void>((resolve, reject) => {
+      readFile("./src/repo/persons.json", "utf-8", (err, peopleData) => {
+        if (err != null) {
+          reject(err);
+        }
+        const parsedData = JSON.parse(peopleData);
+        resolve(parsedData);
+      });
+    });
   },
-  addPerson: () => {},
+  addPerson: async (newData: Person) => {
+    try {
+      let oldData: Person[] = []; 
+      let changedData = [];
+      let testData = "";
+      const dataPromise = new Promise<void>((resolve, reject) => {
+        readFile("./src/repo/persons.json", "utf-8", (err, peopleData) => {
+          if (err != null) {
+            reject(err);
+          }
+          const parsedData = JSON.parse(peopleData);
+          resolve(parsedData);
+        });
+      });
+      function mergeData(data: any) {
+        // const dataStringed = JSON.stringify(data);
+        // testData = dataStringed;
+        return  data;
+      }
+      const resolvedData = await dataPromise.then((res) => mergeData(res));
+      changedData = resolvedData;
+      changedData.push(newData);
+      console.log(changedData);
+      const dataStringed = JSON.stringify(changedData);
+
+      
+      writeFile("./src/repo/persons.json", dataStringed, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("file successfully written");
+        }
+      });
+      return true;
+    } catch (error) {
+      return false;
+    }
+  },
 };
 
 export default peopleRepo;
